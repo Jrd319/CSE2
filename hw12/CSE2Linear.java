@@ -59,22 +59,32 @@ public class CSE2Linear {
             
             int search = input.nextInt(); //new int with search value
             
-            for (int i = 0; i < 15; i++) {
-                if (grades[i] == search) { //if the grade is equal to search value break and print
-                    System.out.println(search+ " was found using " +(i + 1)+ " iterations");
+            int low = 0; //create int for low variable
+            int high = grades.length - 1; //set high var to length of array - 1
+            int it = 0; //creat counter
+            int mid2 = 0;
+            
+            while (high >= low) { //run loop while high var is larger equal to low var
+                it++;
+                int mid = (low + high) / 2; //create mid point in array
+                mid2 = mid;
+                if (search < grades[mid]) { //if search var is less than value of mid point 
+                    high = mid - 1; //new high var becomes 1 less than old mid
+                }
+                else if (search == grades[mid]) { //if search is equal to mid then print and break
+                    System.out.println(search+ " was found using " +it+ " iterations");
                     break;
                 }
-                else if (grades[i] > search) { //if the value is larger than the search break and print
-                    System.out.println(search+ " was not found using " +(i + 1)+ " interations");
-                    break;
-                }
-                else if (i == 14 && grades[i] != search){ //if reaches the end print
-                    System.out.println (search+ " was not found using 15 interations");
-                }
-                else {
-                    continue;
-                }
+                else { //if  search var is greater than value of mid point
+                    low = mid + 1; //than low point increases to one less than old mid 
+                } 
+                
             }
+            
+            if (search != grades[mid2]) { //after exits loop if search doesnt equal the mid value 
+            System.out.println(search+ " was not found using " +it+ " iterations"); //print
+            }
+
             
             
             for (int j =  0; j < 20; j++) { //scramble the grades
